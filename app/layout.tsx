@@ -1,6 +1,7 @@
 import type React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Sidebar } from "./dashboard/components/sidebar";
+import { SecondSidebar } from "./dashboard/components/second-sidebar";
 import { Header } from "./dashboard/components/header";
 
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function DashboardLayout({
               <Header />
               <main className="flex-1 overflow-auto p-6">{children}</main>
             </div>
+            <SecondSidebar />
           </div>
         </ThemeProvider>
       </body>

@@ -146,10 +146,10 @@ export function Sidebar() {
                         key={child.name}
                         href={child.href}
                         className={cn(
-                          "block rounded-lg px-3 py-1 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                          "block rounded-lg px-3 py-1 text-sm text-right transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                           pathname === child.href
                             ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                            : "text-sidebar-foreground/70"
+                            : "text-sidebar-foreground/60"
                         )}
                       >
                         {child.name}

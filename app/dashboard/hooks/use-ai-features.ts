@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useState, useCallback } from "react"
+import { useState, useCallback } from "react";
 
 export interface AIFeature {
-  id: string
-  name: string
-  description: string
-  category: "chat" | "content" | "image" | "audio"
-  isActive: boolean
-  usageCount: number
-  lastUsed?: Date
+  id: string;
+  name: string;
+  description: string;
+  category: "chat" | "content" | "image" | "audio";
+  isActive: boolean;
+  usageCount: number;
+  lastUsed?: Date;
 }
 
 export function useAIFeatures() {
   const [features] = useState<AIFeature[]>([
     {
       id: "chat-assistant",
-      name: "المساعد الذكي",
-      description: "محادثات ذكية ومساعدة فورية",
+      name: "دستیار هوشمند",
+      description: "گفتگوهای هوشمند و کمک فوری",
       category: "chat",
       isActive: true,
       usageCount: 45,
@@ -25,8 +25,8 @@ export function useAIFeatures() {
     },
     {
       id: "content-generator",
-      name: "مولد المحتوى",
-      description: "إنشاء محتوى تسويقي ومقالات",
+      name: "تولیدکننده محتوا",
+      description: "ایجاد محتوای بازاریابی و مقالات",
       category: "content",
       isActive: true,
       usageCount: 23,
@@ -34,8 +34,8 @@ export function useAIFeatures() {
     },
     {
       id: "image-generator",
-      name: "مولد الصور",
-      description: "إنشاء صور فنية بالذكاء الاصطناعي",
+      name: "تولیدکننده تصویر",
+      description: "ایجاد تصاویر هنری با هوش مصنوعی",
       category: "image",
       isActive: true,
       usageCount: 12,
@@ -43,28 +43,28 @@ export function useAIFeatures() {
     },
     {
       id: "audio-tools",
-      name: "أدوات الصوت",
-      description: "تحويل النص لصوت والعكس",
+      name: "ابزارهای صوتی",
+      description: "تبدیل متن به صدا و بالعکس",
       category: "audio",
       isActive: false,
       usageCount: 0,
     },
-  ])
+  ]);
 
   const getFeaturesByCategory = useCallback(
     (category: AIFeature["category"]) => {
-      return features.filter((feature) => feature.category === category)
+      return features.filter((feature) => feature.category === category);
     },
-    [features],
-  )
+    [features]
+  );
 
   const getActiveFeatures = useCallback(() => {
-    return features.filter((feature) => feature.isActive)
-  }, [features])
+    return features.filter((feature) => feature.isActive);
+  }, [features]);
 
   return {
     features,
     getFeaturesByCategory,
     getActiveFeatures,
-  }
+  };
 }

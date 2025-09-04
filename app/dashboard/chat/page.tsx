@@ -1,5 +1,5 @@
-import { ChatInterface } from "../components/chat/chat-interface"
-import { ChatSidebar } from "../components/chat/chat-sidebar"
+import { ChatInterface } from "../components/chat/chat-interface";
+import { ChatSidebar } from "../components/chat/chat-sidebar";
 
 export default function ChatPage() {
   return (
@@ -9,5 +9,5 @@ export default function ChatPage() {
         <ChatInterface />
       </div>
     </div>
-  )
+  );
 }

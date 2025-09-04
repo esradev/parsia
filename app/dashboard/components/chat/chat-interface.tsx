@@ -1,62 +1,62 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Send, Mic, Paperclip, MoreVertical } from "lucide-react"
-import { ChatMessage } from "./chat-message"
-import { useChatMessages } from "../../hooks/use-chat-messages"
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Send, Mic, Paperclip, MoreVertical } from "lucide-react";
+import { ChatMessage } from "./chat-message";
+import { useChatMessages } from "../../hooks/use-chat-messages";
 
 export function ChatInterface() {
-  const [input, setInput] = useState("")
-  const [isTyping, setIsTyping] = useState(false)
-  const { messages, addMessage, isLoading } = useChatMessages()
-  const scrollAreaRef = useRef<HTMLDivElement>(null)
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const { messages, addMessage, isLoading } = useChatMessages();
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const handleSend = async () => {
-    if (!input.trim()) return
+    if (!input.trim()) return;
 
     const userMessage = {
       id: Date.now().toString(),
       content: input,
       role: "user" as const,
       timestamp: new Date(),
-    }
+    };
 
-    addMessage(userMessage)
-    setInput("")
-    setIsTyping(true)
+    addMessage(userMessage);
+    setInput("");
+    setIsTyping(true);
 
     // Simulate AI response
     setTimeout(() => {
       const aiMessage = {
         id: (Date.now() + 1).toString(),
-        content: `شكراً لك على سؤالك: "${input}". هذا مثال على رد الذكاء الاصطناعي. يمكنني مساعدتك في مختلف المهام مثل كتابة المحتوى، الترجمة، والإجابة على الأسئلة.`,
+        content: `ممنون بابت سوال شما: "${input}". این یک نمونه پاسخ هوش مصنوعی است. می‌توانم در کارهای مختلف مثل تولید محتوا، ترجمه و پاسخ به سوالات به شما کمک کنم.`,
         role: "assistant" as const,
         timestamp: new Date(),
-      }
-      addMessage(aiMessage)
-      setIsTyping(false)
-    }, 1500)
-  }
+      };
+      addMessage(aiMessage);
+      setIsTyping(false);
+    }, 1500);
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSend()
+      e.preventDefault();
+      handleSend();
     }
-  }
+  };
 
   useEffect(() => {
     if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
-  }, [messages, isTyping])
+  }, [messages, isTyping]);
 
   return (
     <Card className="flex flex-col h-full">
@@ -68,8 +68,8 @@ export function ChatInterface() {
             <AvatarFallback>AI</AvatarFallback>
           </Avatar>
           <div className="text-right">
-            <h3 className="font-semibold">المساعد الذكي</h3>
-            <p className="text-sm text-muted-foreground">متصل الآن</p>
+            <h3 className="font-semibold">دستیار هوشمند</h3>
+            <p className="text-sm text-muted-foreground">اکنون آنلاین</p>
           </div>
         </div>
         <Button variant="ghost" size="sm">
@@ -82,8 +82,12 @@ export function ChatInterface() {
         <div className="space-y-4">
           {messages.length === 0 && (
             <div className="text-center text-muted-foreground py-8">
-              <p className="text-lg mb-2">مرحباً! كيف يمكنني مساعدتك اليوم؟</p>
-              <p className="text-sm">ابدأ محادثة جديدة بكتابة رسالتك أدناه</p>
+              <p className="text-lg mb-2">
+                سلام! چگونه می‌توانم امروز به شما کمک کنم؟
+              </p>
+              <p className="text-sm">
+                برای شروع گفتگو، پیام خود را در پایین بنویسید
+              </p>
             </div>
           )}
 
@@ -120,15 +124,21 @@ export function ChatInterface() {
         <div className="flex items-end gap-2">
           <div className="flex-1 relative">
             <Input
+              placeholder="پیام خود را اینجا بنویسید..."
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setInput(e.target.value)
+              }
               onKeyPress={handleKeyPress}
-              placeholder="اكتب رسالتك هنا..."
               className="pr-12 text-right resize-none"
               dir="rtl"
               disabled={isLoading}
             />
-            <Button variant="ghost" size="sm" className="absolute right-2 top-1/2 -translate-y-1/2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="absolute right-2 top-1/2 -translate-y-1/2"
+            >
               <Paperclip className="h-4 w-4" />
             </Button>
           </div>
@@ -142,8 +152,10 @@ export function ChatInterface() {
           </Button>
         </div>
 
-        <p className="text-xs text-muted-foreground mt-2 text-right">اضغط Enter للإرسال، Shift+Enter لسطر جديد</p>
+        <p className="text-xs text-muted-foreground mt-2 text-right">
+          برای ارسال Enter را فشار دهید، Shift+Enter برای خط جدید
+        </p>
       </div>
     </Card>
-  )
+  );
 }

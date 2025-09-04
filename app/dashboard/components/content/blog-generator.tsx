@@ -1,77 +1,92 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { BookOpen, Copy, Download, RefreshCw } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { BookOpen, Copy, Download, RefreshCw } from "lucide-react";
 
 const blogTypes = [
-  { value: "howto", label: "دليل إرشادي" },
-  { value: "listicle", label: "قائمة" },
-  { value: "review", label: "مراجعة" },
+  { value: "howto", label: "راهنمای گام‌به‌گام" },
+  { value: "listicle", label: "فهرست" },
+  { value: "review", label: "بررسی" },
   { value: "news", label: "خبر" },
-  { value: "opinion", label: "رأي" },
-  { value: "tutorial", label: "تعليمي" },
-]
+  { value: "opinion", label: "نظر" },
+  { value: "tutorial", label: "آموزشی" },
+];
 
 export function BlogGenerator() {
-  const [title, setTitle] = useState("")
-  const [outline, setOutline] = useState("")
-  const [blogType, setBlogType] = useState("")
-  const [targetAudience, setTargetAudience] = useState("")
-  const [keywords, setKeywords] = useState("")
-  const [generatedBlog, setGeneratedBlog] = useState("")
-  const [isGenerating, setIsGenerating] = useState(false)
+  const [title, setTitle] = useState("");
+  const [outline, setOutline] = useState("");
+  const [blogType, setBlogType] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [generatedBlog, setGeneratedBlog] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerate = async () => {
-    if (!title.trim()) return
+    if (!title.trim()) return;
 
-    setIsGenerating(true)
+    setIsGenerating(true);
 
     setTimeout(() => {
       const sampleBlog = `# ${title}
 
-## مقدمة
+## مقدمه
 
-في عالم اليوم المتسارع، أصبح ${title.toLowerCase()} موضوعاً مهماً يستحق الاهتمام والدراسة. هذا المقال سيقدم لك دليلاً شاملاً حول هذا الموضوع.
+در دنیای پرشتاب امروز، ${title.toLowerCase()} موضوعی مهم است که شایسته توجه و بررسی می‌باشد. این مقاله راهنمای جامعی درباره این موضوع ارائه می‌دهد.
 
-## النقاط الرئيسية
+## نکات اصلی
 
-### 1. الأساسيات
-${outline || "سنبدأ بالأساسيات التي يجب على كل شخص معرفتها حول هذا الموضوع."}
+### 1. اصول اولیه
+${
+  outline ||
+  "ابتدا با اصول اولیه‌ای که هر فرد باید درباره این موضوع بداند شروع می‌کنیم."
+}
 
-### 2. الاستراتيجيات المتقدمة
-بعد فهم الأساسيات، يمكننا الانتقال إلى الاستراتيجيات الأكثر تقدماً وفعالية.
+### 2. استراتژی‌های پیشرفته
+پس از درک اصول اولیه، می‌توانیم به سراغ استراتژی‌های پیشرفته‌تر و مؤثرتر برویم.
 
-### 3. التطبيق العملي
-الجانب النظري مهم، لكن التطبيق العملي هو ما يحدث الفرق الحقيقي.
+### 3. کاربرد عملی
+بخش نظری مهم است اما کاربرد عملی تفاوت واقعی را رقم می‌زند.
 
-### 4. أفضل الممارسات
-هناك مجموعة من أفضل الممارسات التي يجب اتباعها لضمان النجاح.
+### 4. بهترین روش‌ها
+مجموعه‌ای از بهترین روش‌ها وجود دارد که رعایت آن‌ها موفقیت را تضمین می‌کند.
 
-### 5. الأخطاء الشائعة
-تجنب هذه الأخطاء الشائعة سيوفر عليك الكثير من الوقت والجهد.
+### 5. اشتباهات رایج
+اجتناب از این اشتباهات رایج باعث صرفه‌جویی در زمان و انرژی شما خواهد شد.
 
-## الخلاصة
+## جمع‌بندی
 
-في الختام، ${title.toLowerCase()} موضوع معقد يتطلب فهماً عميقاً وتطبيقاً عملياً. باتباع النصائح والاستراتيجيات المذكورة في هذا المقال، ستكون على الطريق الصحيح لتحقيق النجاح.
+در پایان، ${title.toLowerCase()} موضوعی پیچیده است که نیازمند درک عمیق و کاربرد عملی می‌باشد. با رعایت نکات و استراتژی‌های ذکر شده در این مقاله، در مسیر درست موفقیت قرار خواهید گرفت.
 
-## المصادر والمراجع
+## منابع و مراجع
 
-- مصدر 1: معلومات أساسية حول الموضوع
-- مصدر 2: دراسات وأبحاث متخصصة
-- مصدر 3: تجارب عملية وحالات دراسية`
+- منبع ۱: اطلاعات پایه درباره موضوع
+- منبع ۲: مطالعات و تحقیقات تخصصی
+- منبع ۳: تجربیات عملی و مطالعات موردی`;
 
-      setGeneratedBlog(sampleBlog)
-      setIsGenerating(false)
-    }, 3000)
-  }
+      setGeneratedBlog(sampleBlog);
+      setIsGenerating(false);
+    }, 3000);
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -80,18 +95,18 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
         <CardHeader className="text-right">
           <CardTitle className="flex items-center gap-2">
             <BookOpen className="h-5 w-5" />
-            إعدادات المقال
+            تنظیمات مقاله
           </CardTitle>
-          <CardDescription>حدد تفاصيل المقال المطلوب كتابته</CardDescription>
+          <CardDescription>جزئیات مقاله موردنظر را مشخص کنید</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title" className="text-right block">
-              عنوان المقال
+              عنوان مقاله
             </Label>
             <Input
               id="title"
-              placeholder="مثال: دليل شامل للتسويق الرقمي"
+              placeholder="مثال: راهنمای جامع بازاریابی دیجیتال"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="text-right"
@@ -101,11 +116,11 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
 
           <div className="space-y-2">
             <Label htmlFor="outline" className="text-right block">
-              الخطوط العريضة (اختياري)
+              خطوط کلی (اختیاری)
             </Label>
             <Textarea
               id="outline"
-              placeholder="اكتب النقاط الرئيسية التي تريد تغطيتها في المقال..."
+              placeholder="نکات اصلی موردنظر برای پوشش در مقاله را بنویسید..."
               value={outline}
               onChange={(e) => setOutline(e.target.value)}
               className="min-h-[80px] text-right"
@@ -115,10 +130,10 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-right block">نوع المقال</Label>
+              <Label className="text-right block">نوع مقاله</Label>
               <Select value={blogType} onValueChange={setBlogType} dir="rtl">
                 <SelectTrigger>
-                  <SelectValue placeholder="اختر نوع المقال" />
+                  <SelectValue placeholder="نوع مقاله را انتخاب کنید" />
                 </SelectTrigger>
                 <SelectContent>
                   {blogTypes.map((type) => (
@@ -132,11 +147,11 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
 
             <div className="space-y-2">
               <Label htmlFor="audience" className="text-right block">
-                الجمهور المستهدف
+                مخاطب هدف
               </Label>
               <Input
                 id="audience"
-                placeholder="مثال: المبتدئين في التسويق"
+                placeholder="مثال: مبتدیان بازاریابی"
                 value={targetAudience}
                 onChange={(e) => setTargetAudience(e.target.value)}
                 className="text-right"
@@ -147,11 +162,11 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
 
           <div className="space-y-2">
             <Label htmlFor="keywords" className="text-right block">
-              الكلمات المفتاحية
+              کلمات کلیدی
             </Label>
             <Input
               id="keywords"
-              placeholder="كلمة1، كلمة2، كلمة3"
+              placeholder="کلمه۱، کلمه۲، کلمه۳"
               value={keywords}
               onChange={(e) => setKeywords(e.target.value)}
               className="text-right"
@@ -159,16 +174,20 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
             />
           </div>
 
-          <Button onClick={handleGenerate} disabled={!title.trim() || isGenerating} className="w-full">
+          <Button
+            onClick={handleGenerate}
+            disabled={!title.trim() || isGenerating}
+            className="w-full"
+          >
             {isGenerating ? (
               <>
                 <RefreshCw className="ml-2 h-4 w-4 animate-spin" />
-                جاري كتابة المقال...
+                در حال تولید مقاله...
               </>
             ) : (
               <>
                 <BookOpen className="ml-2 h-4 w-4" />
-                كتابة المقال
+                تولید مقاله
               </>
             )}
           </Button>
@@ -179,10 +198,14 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
       <Card>
         <CardHeader className="text-right">
           <div className="flex items-center justify-between">
-            <CardTitle>المقال المُنتج</CardTitle>
+            <CardTitle>مقاله تولیدشده</CardTitle>
             {generatedBlog && (
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(generatedBlog)}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigator.clipboard.writeText(generatedBlog)}
+                >
                   <Copy className="h-4 w-4" />
                 </Button>
                 <Button variant="outline" size="sm">
@@ -191,31 +214,40 @@ ${outline || "سنبدأ بالأساسيات التي يجب على كل شخص
               </div>
             )}
           </div>
-          <CardDescription>المقال النهائي جاهز للنشر</CardDescription>
+          <CardDescription>مقاله نهایی آماده انتشار است</CardDescription>
         </CardHeader>
         <CardContent>
           {generatedBlog ? (
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Badge variant="secondary">{generatedBlog.split(" ").length} كلمة</Badge>
-                <Badge variant="secondary">{Math.ceil(generatedBlog.split(" ").length / 200)} دقائق قراءة</Badge>
+                <Badge variant="secondary">
+                  {generatedBlog.split(" ").length} کلمه
+                </Badge>
+                <Badge variant="secondary">
+                  {Math.ceil(generatedBlog.split(" ").length / 200)} دقیقه
+                  مطالعه
+                </Badge>
               </div>
 
               <Separator />
 
               <div className="prose prose-sm max-w-none text-right" dir="rtl">
-                <div className="whitespace-pre-wrap leading-relaxed">{generatedBlog}</div>
+                <div className="whitespace-pre-wrap leading-relaxed">
+                  {generatedBlog}
+                </div>
               </div>
             </div>
           ) : (
             <div className="text-center text-muted-foreground py-12">
               <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>سيظهر المقال المُنتج هنا</p>
-              <p className="text-sm mt-1">املأ النموذج واضغط على "كتابة المقال"</p>
+              <p>مقاله تولیدشده اینجا نمایش داده می‌شود</p>
+              <p className="text-sm mt-1">
+                فرم را پر کنید و روی "تولید مقاله" کلیک کنید
+              </p>
             </div>
           )}
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

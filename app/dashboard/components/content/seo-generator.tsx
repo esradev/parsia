@@ -1,47 +1,65 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Search, TrendingUp, Target } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Copy, Search, TrendingUp, Target } from "lucide-react";
 
 export function SEOGenerator() {
-  const [topic, setTopic] = useState("")
-  const [targetKeywords, setTargetKeywords] = useState("")
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [results, setResults] = useState({
+  const [topic, setTopic] = useState("");
+  const [targetKeywords, setTargetKeywords] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [results, setResults] = useState<{
+    title: string;
+    metaDescription: string;
+    keywords: string[];
+    headings: string[];
+  }>({
     title: "",
     metaDescription: "",
     keywords: [],
     headings: [],
-  })
+  });
 
   const handleGenerate = async () => {
-    if (!topic.trim()) return
+    if (!topic.trim()) return;
 
-    setIsGenerating(true)
+    setIsGenerating(true);
 
     setTimeout(() => {
       setResults({
-        title: `${topic} - دليل شامل 2024 | أفضل النصائح والاستراتيجيات`,
-        metaDescription: `اكتشف كل ما تحتاج لمعرفته عن ${topic}. دليل شامل يتضمن أفضل الممارسات والنصائح العملية لتحقيق النجاح في ${topic}.`,
-        keywords: [topic, `${topic} 2024`, `دليل ${topic}`, `نصائح ${topic}`, `استراتيجيات ${topic}`, `أفضل ${topic}`],
-        headings: [
-          `ما هو ${topic}؟`,
-          `أهمية ${topic} في العصر الحديث`,
-          `أفضل استراتيجيات ${topic}`,
-          `نصائح عملية لتطبيق ${topic}`,
-          `أخطاء شائعة في ${topic} وكيفية تجنبها`,
-          `مستقبل ${topic}`,
+        title: `${topic} - راهنمای جامع ۲۰۲۴ | بهترین نکات و استراتژی‌ها`,
+        metaDescription: `همه چیز درباره ${topic} را کشف کنید. راهنمای جامع شامل بهترین روش‌ها و نکات عملی برای موفقیت در ${topic}.`,
+        keywords: [
+          topic,
+          `${topic} ۲۰۲۴`,
+          `راهنمای ${topic}`,
+          `نکات ${topic}`,
+          `استراتژی‌های ${topic}`,
+          `بهترین ${topic}`,
         ],
-      })
-      setIsGenerating(false)
-    }, 2000)
-  }
+        headings: [
+          ` ${topic} چیست؟`,
+          `اهمیت ${topic} در عصر حاضر`,
+          `بهترین استراتژی‌های ${topic}`,
+          `نکات عملی برای اجرای ${topic}`,
+          `اشتباهات رایج در ${topic} و راه‌های جلوگیری`,
+          `آینده ${topic}`,
+        ],
+      });
+      setIsGenerating(false);
+    }, 2000);
+  };
 
   return (
     <div className="space-y-6">
@@ -50,19 +68,22 @@ export function SEOGenerator() {
         <CardHeader className="text-right">
           <CardTitle className="flex items-center gap-2">
             <Search className="h-5 w-5" />
-            إعدادات SEO
+            تنظیمات سئو
           </CardTitle>
-          <CardDescription>أدخل معلومات الموضوع لإنتاج محتوى محسن لمحركات البحث</CardDescription>
+          <CardDescription>
+            اطلاعات موضوع را وارد کنید تا محتوای بهینه شده برای موتورهای جستجو
+            تولید شود
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="topic" className="text-right block">
-                الموضوع الرئيسي
+                موضوع اصلی
               </Label>
               <Input
                 id="topic"
-                placeholder="مثال: التسويق الرقمي"
+                placeholder="مثال: بازاریابی دیجیتال"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 className="text-right"
@@ -72,11 +93,11 @@ export function SEOGenerator() {
 
             <div className="space-y-2">
               <Label htmlFor="keywords" className="text-right block">
-                الكلمات المفتاحية المستهدفة
+                کلمات کلیدی هدف
               </Label>
               <Input
                 id="keywords"
-                placeholder="كلمة1، كلمة2، كلمة3"
+                placeholder="کلمه۱، کلمه۲، کلمه۳"
                 value={targetKeywords}
                 onChange={(e) => setTargetKeywords(e.target.value)}
                 className="text-right"
@@ -85,8 +106,12 @@ export function SEOGenerator() {
             </div>
           </div>
 
-          <Button onClick={handleGenerate} disabled={!topic.trim() || isGenerating} className="w-full">
-            {isGenerating ? "جاري الإنتاج..." : "إنتاج محتوى SEO"}
+          <Button
+            onClick={handleGenerate}
+            disabled={!topic.trim() || isGenerating}
+            className="w-full"
+          >
+            {isGenerating ? "در حال تولید..." : "تولید محتوای سئو"}
           </Button>
         </CardContent>
       </Card>
@@ -95,10 +120,10 @@ export function SEOGenerator() {
       {results.title && (
         <Tabs defaultValue="title" className="w-full" dir="rtl">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="title">العنوان</TabsTrigger>
-            <TabsTrigger value="meta">الوصف</TabsTrigger>
-            <TabsTrigger value="keywords">الكلمات المفتاحية</TabsTrigger>
-            <TabsTrigger value="headings">العناوين الفرعية</TabsTrigger>
+            <TabsTrigger value="title">عنوان</TabsTrigger>
+            <TabsTrigger value="meta">توضیحات</TabsTrigger>
+            <TabsTrigger value="keywords">کلمات کلیدی</TabsTrigger>
+            <TabsTrigger value="headings">عناوین فرعی</TabsTrigger>
           </TabsList>
 
           <TabsContent value="title" className="space-y-4">
@@ -106,9 +131,11 @@ export function SEOGenerator() {
               <CardHeader className="text-right">
                 <CardTitle className="flex items-center gap-2">
                   <Target className="h-5 w-5" />
-                  عنوان الصفحة (Title Tag)
+                  عنوان صفحه (Title Tag)
                 </CardTitle>
-                <CardDescription>العنوان الذي سيظهر في نتائج البحث</CardDescription>
+                <CardDescription>
+                  عنوانی که در نتایج جستجو نمایش داده می‌شود
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -116,10 +143,18 @@ export function SEOGenerator() {
                     <p className="font-medium">{results.title}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <Badge variant="secondary">{results.title.length} حرف</Badge>
-                    <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(results.title)}>
+                    <Badge variant="secondary">
+                      {results.title.length} کاراکتر
+                    </Badge>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        navigator.clipboard.writeText(results.title)
+                      }
+                    >
                       <Copy className="h-4 w-4 ml-1" />
-                      نسخ
+                      کپی
                     </Button>
                   </div>
                 </div>
@@ -130,8 +165,10 @@ export function SEOGenerator() {
           <TabsContent value="meta" className="space-y-4">
             <Card>
               <CardHeader className="text-right">
-                <CardTitle>وصف الميتا (Meta Description)</CardTitle>
-                <CardDescription>الوصف الذي سيظهر تحت العنوان في نتائج البحث</CardDescription>
+                <CardTitle>توضیحات متا (Meta Description)</CardTitle>
+                <CardDescription>
+                  توضیحی که زیر عنوان در نتایج جستجو نمایش داده می‌شود
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -139,14 +176,18 @@ export function SEOGenerator() {
                     <p>{results.metaDescription}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <Badge variant="secondary">{results.metaDescription.length} حرف</Badge>
+                    <Badge variant="secondary">
+                      {results.metaDescription.length} کاراکتر
+                    </Badge>
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => navigator.clipboard.writeText(results.metaDescription)}
+                      onClick={() =>
+                        navigator.clipboard.writeText(results.metaDescription)
+                      }
                     >
                       <Copy className="h-4 w-4 ml-1" />
-                      نسخ
+                      کپی
                     </Button>
                   </div>
                 </div>
@@ -159,14 +200,20 @@ export function SEOGenerator() {
               <CardHeader className="text-right">
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5" />
-                  الكلمات المفتاحية المقترحة
+                  کلمات کلیدی پیشنهادی
                 </CardTitle>
-                <CardDescription>كلمات مفتاحية محسنة لمحركات البحث</CardDescription>
+                <CardDescription>
+                  کلمات کلیدی بهینه شده برای موتورهای جستجو
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 justify-end">
                   {results.keywords.map((keyword, index) => (
-                    <Badge key={index} variant="outline" className="cursor-pointer hover:bg-accent">
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="cursor-pointer hover:bg-accent"
+                    >
                       {keyword}
                     </Badge>
                   ))}
@@ -178,18 +225,25 @@ export function SEOGenerator() {
           <TabsContent value="headings" className="space-y-4">
             <Card>
               <CardHeader className="text-right">
-                <CardTitle>العناوين الفرعية المقترحة</CardTitle>
-                <CardDescription>هيكل العناوين لتحسين SEO</CardDescription>
+                <CardTitle>عناوین فرعی پیشنهادی</CardTitle>
+                <CardDescription>ساختار عناوین برای بهبود سئو</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {results.headings.map((heading, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-muted rounded-lg"
+                    >
                       <div className="text-right flex-1">
                         <span className="font-medium">H{index + 2}</span>
                         <p className="mt-1">{heading}</p>
                       </div>
-                      <Button variant="ghost" size="sm" onClick={() => navigator.clipboard.writeText(heading)}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => navigator.clipboard.writeText(heading)}
+                      >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
@@ -201,5 +255,5 @@ export function SEOGenerator() {
         </Tabs>
       )}
     </div>
-  )
+  );
 }

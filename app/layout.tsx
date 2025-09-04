@@ -26,7 +26,7 @@ export default function DashboardLayout({
               <Header />
               <main className="flex-1 overflow-auto p-6">{children}</main>
             </div>
-            <SecondSidebar />
+            {/* <SecondSidebar /> */}
           </div>
         </ThemeProvider>
       </body>

@@ -1,111 +1,131 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { Separator } from "@/components/ui/separator"
-import { Mic, FileAudio, Copy, Download, RefreshCw, Play, Pause } from "lucide-react"
+import { useState, useRef } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
+import {
+  Mic,
+  FileAudio,
+  Copy,
+  Download,
+  RefreshCw,
+  Play,
+  Pause,
+} from "lucide-react";
 
 const languages = [
-  { value: "ar", label: "العربية", flag: "🇸🇦" },
-  { value: "en", label: "الإنجليزية", flag: "🇺🇸" },
-  { value: "fr", label: "الفرنسية", flag: "🇫🇷" },
-  { value: "es", label: "الإسبانية", flag: "🇪🇸" },
-]
+  { value: "ar", label: "عربی", flag: "🇸🇦" },
+  { value: "en", label: "انگلیسی", flag: "🇺🇸" },
+  { value: "fr", label: "فرانسوی", flag: "🇫🇷" },
+  { value: "es", label: "اسپانیایی", flag: "🇪🇸" },
+];
 
 const audioFormats = [
   { value: "mp3", label: "MP3" },
   { value: "wav", label: "WAV" },
   { value: "m4a", label: "M4A" },
   { value: "ogg", label: "OGG" },
-]
+];
 
 export function SpeechToText() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [language, setLanguage] = useState("ar")
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [transcribedText, setTranscribedText] = useState("")
-  const [audioUrl, setAudioUrl] = useState("")
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [language, setLanguage] = useState("ar");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [transcribedText, setTranscribedText] = useState("");
+  const [audioUrl, setAudioUrl] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file)
-      setAudioUrl(URL.createObjectURL(file))
+      setSelectedFile(file);
+      setAudioUrl(URL.createObjectURL(file));
     }
-  }
+  };
 
   const handleDrop = (event: React.DragEvent) => {
-    event.preventDefault()
-    const file = event.dataTransfer.files[0]
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
     if (file && file.type.startsWith("audio/")) {
-      setSelectedFile(file)
-      setAudioUrl(URL.createObjectURL(file))
+      setSelectedFile(file);
+      setAudioUrl(URL.createObjectURL(file));
     }
-  }
+  };
 
   const handleDragOver = (event: React.DragEvent) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   const startRecording = () => {
-    setIsRecording(true)
+    setIsRecording(true);
     // Here you would implement actual recording logic
     setTimeout(() => {
-      setIsRecording(false)
+      setIsRecording(false);
       // Simulate recorded file
-      setAudioUrl("/placeholder-recording.mp3")
-    }, 5000)
-  }
+      setAudioUrl("/placeholder-recording.mp3");
+    }, 5000);
+  };
 
   const handleTranscribe = async () => {
-    if (!selectedFile && !audioUrl) return
+    if (!selectedFile && !audioUrl) return;
 
-    setIsProcessing(true)
+    setIsProcessing(true);
 
     // Simulate transcription
     setTimeout(() => {
-      const sampleText = `هذا نص تجريبي تم استخراجه من الملف الصوتي. 
+      const sampleText = `این یک متن نمونه است که از فایل صوتی استخراج شده است.
 
-يمكن للذكاء الاصطناعي تحويل الكلام إلى نص مكتوب بدقة عالية، مع دعم اللغة العربية والعديد من اللغات الأخرى.
+هوش مصنوعی می‌تواند گفتار را با دقت بالا به متن تبدیل کند و از زبان فارسی و بسیاری زبان‌های دیگر پشتیبانی می‌کند.
 
-الميزات المتاحة:
-- دقة عالية في التعرف على الكلام
-- دعم تنسيقات صوتية متعددة
-- إضافة علامات الترقيم تلقائياً
-- تحديد المتحدثين المختلفين
+امکانات موجود:
+- دقت بالا در تشخیص گفتار
+- پشتیبانی از فرمت‌های صوتی مختلف
+- افزودن خودکار علائم نگارشی
+- تشخیص گویندگان مختلف
 
-هذا النص جاهز للاستخدام والتعديل حسب احتياجاتك.`
+این متن آماده استفاده و ویرایش بر اساس نیاز شماست.`;
 
-      setTranscribedText(sampleText)
-      setIsProcessing(false)
-    }, 4000)
-  }
+      setTranscribedText(sampleText);
+      setIsProcessing(false);
+    }, 4000);
+  };
 
   const togglePlayback = () => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause()
+        audioRef.current.pause();
       } else {
-        audioRef.current.play()
+        audioRef.current.play();
       }
-      setIsPlaying(!isPlaying)
+      setIsPlaying(!isPlaying);
     }
-  }
+  };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(transcribedText)
-  }
+    navigator.clipboard.writeText(transcribedText);
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -114,9 +134,11 @@ export function SpeechToText() {
         <CardHeader className="text-right">
           <CardTitle className="flex items-center gap-2">
             <Mic className="h-5 w-5" />
-            رفع الملف الصوتي
+            بارگذاری فایل صوتی
           </CardTitle>
-          <CardDescription>ارفع ملف صوتي أو سجل صوتاً جديداً</CardDescription>
+          <CardDescription>
+            یک فایل صوتی بارگذاری کنید یا صدای جدید ضبط کنید
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* File Upload Area */}
@@ -130,15 +152,23 @@ export function SpeechToText() {
             {selectedFile ? (
               <div>
                 <p className="font-medium">{selectedFile.name}</p>
-                <p className="text-sm text-muted-foreground mt-1">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {(selectedFile.size / 1024 / 1024).toFixed(2)} مگابایت
+                </p>
               </div>
             ) : (
               <div>
-                <p className="font-medium">اسحب الملف الصوتي هنا</p>
-                <p className="text-sm text-muted-foreground mt-1">أو اضغط لاختيار ملف</p>
+                <p className="font-medium">فایل صوتی را اینجا بکشید</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  یا برای انتخاب فایل کلیک کنید
+                </p>
                 <div className="flex justify-center gap-2 mt-2">
                   {audioFormats.map((format) => (
-                    <Badge key={format.value} variant="outline" className="text-xs">
+                    <Badge
+                      key={format.value}
+                      variant="outline"
+                      className="text-xs"
+                    >
                       {format.label}
                     </Badge>
                   ))}
@@ -147,32 +177,43 @@ export function SpeechToText() {
             )}
           </div>
 
-          <input ref={fileInputRef} type="file" accept="audio/*" onChange={handleFileSelect} className="hidden" />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="audio/*"
+            onChange={handleFileSelect}
+            className="hidden"
+          />
 
           <div className="flex items-center gap-4">
             <Separator className="flex-1" />
-            <span className="text-sm text-muted-foreground">أو</span>
+            <span className="text-sm text-muted-foreground">یا</span>
             <Separator className="flex-1" />
           </div>
 
           {/* Recording */}
-          <Button onClick={startRecording} disabled={isRecording} variant="outline" className="w-full bg-transparent">
+          <Button
+            onClick={startRecording}
+            disabled={isRecording}
+            variant="outline"
+            className="w-full bg-transparent"
+          >
             {isRecording ? (
               <>
                 <RefreshCw className="ml-2 h-4 w-4 animate-spin" />
-                جاري التسجيل...
+                در حال ضبط...
               </>
             ) : (
               <>
                 <Mic className="ml-2 h-4 w-4" />
-                تسجيل صوت جديد
+                ضبط صدای جدید
               </>
             )}
           </Button>
 
           {/* Language Selection */}
           <div className="space-y-2">
-            <Label className="text-right block">لغة الملف الصوتي</Label>
+            <Label className="text-right block">زبان فایل صوتی</Label>
             <Select value={language} onValueChange={setLanguage} dir="rtl">
               <SelectTrigger>
                 <SelectValue />
@@ -195,25 +236,38 @@ export function SpeechToText() {
             <div className="p-4 bg-muted rounded-lg">
               <div className="flex items-center gap-3 justify-center">
                 <Button onClick={togglePlayback} size="sm">
-                  {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                  {isPlaying ? (
+                    <Pause className="h-4 w-4" />
+                  ) : (
+                    <Play className="h-4 w-4" />
+                  )}
                 </Button>
-                <span className="text-sm">معاينة الملف الصوتي</span>
+                <span className="text-sm">پیش‌نمایش فایل صوتی</span>
               </div>
-              <audio ref={audioRef} src={audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+              <audio
+                ref={audioRef}
+                src={audioUrl}
+                onEnded={() => setIsPlaying(false)}
+                className="hidden"
+              />
             </div>
           )}
 
           {/* Transcribe Button */}
-          <Button onClick={handleTranscribe} disabled={(!selectedFile && !audioUrl) || isProcessing} className="w-full">
+          <Button
+            onClick={handleTranscribe}
+            disabled={(!selectedFile && !audioUrl) || isProcessing}
+            className="w-full"
+          >
             {isProcessing ? (
               <>
                 <RefreshCw className="ml-2 h-4 w-4 animate-spin" />
-                جاري التحويل...
+                در حال تبدیل...
               </>
             ) : (
               <>
                 <FileAudio className="ml-2 h-4 w-4" />
-                تحويل إلى نص
+                تبدیل به متن
               </>
             )}
           </Button>
@@ -224,7 +278,7 @@ export function SpeechToText() {
       <Card>
         <CardHeader className="text-right">
           <div className="flex items-center justify-between">
-            <CardTitle>النص المستخرج</CardTitle>
+            <CardTitle>متن استخراج‌شده</CardTitle>
             {transcribedText && (
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={handleCopy}>
@@ -236,15 +290,19 @@ export function SpeechToText() {
               </div>
             )}
           </div>
-          <CardDescription>النص المحول من الملف الصوتي</CardDescription>
+          <CardDescription>متن تبدیل‌شده از فایل صوتی</CardDescription>
         </CardHeader>
         <CardContent>
           {transcribedText ? (
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Badge variant="secondary">{transcribedText.split(" ").length} كلمة</Badge>
+                <Badge variant="secondary">
+                  {transcribedText.split(" ").length} کلمه
+                </Badge>
                 <Badge variant="secondary">{transcribedText.length} حرف</Badge>
-                <Badge variant="secondary">{languages.find((l) => l.value === language)?.label}</Badge>
+                <Badge variant="secondary">
+                  {languages.find((l) => l.value === language)?.label}
+                </Badge>
               </div>
 
               <Separator />
@@ -254,18 +312,20 @@ export function SpeechToText() {
                 onChange={(e) => setTranscribedText(e.target.value)}
                 className="min-h-[300px] text-right"
                 dir="rtl"
-                placeholder="النص المستخرج سيظهر هنا..."
+                placeholder="متن استخراج‌شده اینجا نمایش داده می‌شود..."
               />
             </div>
           ) : (
             <div className="text-center text-muted-foreground py-12">
               <Mic className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>سيظهر النص المستخرج هنا</p>
-              <p className="text-sm mt-1">ارفع ملف صوتي واضغط على "تحويل إلى نص"</p>
+              <p>متن استخراج‌شده اینجا نمایش داده می‌شود</p>
+              <p className="text-sm mt-1">
+                یک فایل صوتی بارگذاری کنید و روی «تبدیل به متن» کلیک کنید
+              </p>
             </div>
           )}
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

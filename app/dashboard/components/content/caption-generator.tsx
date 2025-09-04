@@ -1,89 +1,110 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Instagram, Twitter, Facebook, Linkedin, Hash } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Copy,
+  Instagram,
+  Twitter,
+  Facebook,
+  Linkedin,
+  Hash,
+} from "lucide-react";
 
 const platforms = [
-  { value: "instagram", label: "إنستغرام", icon: Instagram, limit: 2200 },
-  { value: "twitter", label: "تويتر", icon: Twitter, limit: 280 },
-  { value: "facebook", label: "فيسبوك", icon: Facebook, limit: 63206 },
-  { value: "linkedin", label: "لينكد إن", icon: Linkedin, limit: 3000 },
-]
+  { value: "instagram", label: "اینستاگرام", icon: Instagram, limit: 2200 },
+  { value: "twitter", label: "توییتر", icon: Twitter, limit: 280 },
+  { value: "facebook", label: "فیسبوک", icon: Facebook, limit: 63206 },
+  { value: "linkedin", label: "لینکدین", icon: Linkedin, limit: 3000 },
+];
 
 const tones = [
-  { value: "casual", label: "غير رسمي" },
-  { value: "professional", label: "مهني" },
-  { value: "funny", label: "مرح" },
-  { value: "inspiring", label: "ملهم" },
-  { value: "promotional", label: "ترويجي" },
-]
+  { value: "casual", label: "غیر رسمی" },
+  { value: "professional", label: "حرفه‌ای" },
+  { value: "funny", label: "طنز" },
+  { value: "inspiring", label: "الهام‌بخش" },
+  { value: "promotional", label: "تبلیغاتی" },
+];
 
 export function CaptionGenerator() {
-  const [content, setContent] = useState("")
-  const [platform, setPlatform] = useState("")
-  const [tone, setTone] = useState("")
-  const [hashtags, setHashtags] = useState("")
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedCaptions, setGeneratedCaptions] = useState<{ [key: string]: string }>({})
+  const [content, setContent] = useState("");
+  const [platform, setPlatform] = useState("");
+  const [tone, setTone] = useState("");
+  const [hashtags, setHashtags] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedCaptions, setGeneratedCaptions] = useState<{
+    [key: string]: string;
+  }>({});
 
   const handleGenerate = async () => {
-    if (!content.trim()) return
+    if (!content.trim()) return;
 
-    setIsGenerating(true)
+    setIsGenerating(true);
 
     setTimeout(() => {
       const captions = {
         instagram: `🌟 ${content}
 
-هذا مثال على تسمية توضيحية لإنستغرام تتضمن رموز تعبيرية وهاشتاغات مناسبة.
+این یک نمونه کپشن برای اینستاگرام است که شامل ایموجی و هشتگ‌های مناسب می‌باشد.
 
-✨ النقاط الرئيسية:
-• نقطة مهمة أولى
-• نقطة مهمة ثانية  
-• نقطة مهمة ثالثة
+✨ نکات کلیدی:
+• نکته مهم اول
+• نکته مهم دوم  
+• نکته مهم سوم
 
-#${hashtags.split("،").join(" #")} #محتوى #تسويق #إنستغرام`,
+#${hashtags.split("،").join(" #")} #محتوا #بازاریابی #اینستاگرام`,
 
         twitter: `${content}
 
-تسمية توضيحية مختصرة ومؤثرة لتويتر 🚀
+کپشن کوتاه و تاثیرگذار برای توییتر 🚀
 
-#${hashtags.split("،")[0]} #تويتر`,
+#${hashtags.split("،")[0]} #توییتر`,
 
         facebook: `${content}
 
-هذا مثال على منشور فيسبوك أطول يمكن أن يتضمن تفاصيل أكثر وقصة كاملة.
+این یک نمونه پست فیسبوک طولانی‌تر است که می‌تواند جزئیات بیشتر و یک داستان کامل را شامل شود.
 
-يمكن أن يحتوي منشور فيسبوك على معلومات مفصلة، قصص شخصية، وروابط خارجية.
+پست فیسبوک می‌تواند اطلاعات مفصل، داستان‌های شخصی و لینک‌های خارجی داشته باشد.
 
 #${hashtags.split("،").join(" #")}`,
 
         linkedin: `${content}
 
-منشور لينكد إن مهني يركز على القيمة المضافة والخبرة المهنية.
+پست حرفه‌ای لینکدین که بر ارزش افزوده و تجربه حرفه‌ای تمرکز دارد.
 
-الأفكار الرئيسية:
-→ فكرة مهنية أولى
-→ فكرة مهنية ثانية
-→ فكرة مهنية ثالثة
+ایده‌های اصلی:
+→ ایده حرفه‌ای اول
+→ ایده حرفه‌ای دوم
+→ ایده حرفه‌ای سوم
 
-ما رأيكم؟ شاركوا تجاربكم في التعليقات.
+نظر شما چیست؟ تجربیات خود را در کامنت‌ها به اشتراک بگذارید.
 
-#${hashtags.split("،").join(" #")} #مهني #لينكد_إن`,
-      }
+#${hashtags.split("،").join(" #")} #حرفه‌ای #لینکدین`,
+      };
 
-      setGeneratedCaptions(captions)
-      setIsGenerating(false)
-    }, 2000)
-  }
+      setGeneratedCaptions(captions);
+      setIsGenerating(false);
+    }, 2000);
+  };
 
   return (
     <div className="space-y-6">
@@ -92,18 +113,20 @@ export function CaptionGenerator() {
         <CardHeader className="text-right">
           <CardTitle className="flex items-center gap-2">
             <Hash className="h-5 w-5" />
-            إعدادات التسمية التوضيحية
+            تنظیمات کپشن
           </CardTitle>
-          <CardDescription>أنشئ تسميات توضيحية مخصصة لمنصات التواصل الاجتماعي</CardDescription>
+          <CardDescription>
+            کپشن‌های سفارشی برای شبکه‌های اجتماعی بسازید
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="content" className="text-right block">
-              المحتوى الأساسي
+              محتوای اصلی
             </Label>
             <Textarea
               id="content"
-              placeholder="اكتب الفكرة الرئيسية للمنشور..."
+              placeholder="ایده اصلی پست را بنویسید..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
               className="min-h-[100px] text-right"
@@ -113,14 +136,14 @@ export function CaptionGenerator() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-right block">المنصة المستهدفة</Label>
+              <Label className="text-right block">پلتفرم هدف</Label>
               <Select value={platform} onValueChange={setPlatform} dir="rtl">
                 <SelectTrigger>
-                  <SelectValue placeholder="اختر المنصة" />
+                  <SelectValue placeholder="پلتفرم را انتخاب کنید" />
                 </SelectTrigger>
                 <SelectContent>
                   {platforms.map((p) => {
-                    const Icon = p.icon
+                    const Icon = p.icon;
                     return (
                       <SelectItem key={p.value} value={p.value}>
                         <div className="flex items-center gap-2">
@@ -128,17 +151,17 @@ export function CaptionGenerator() {
                           {p.label}
                         </div>
                       </SelectItem>
-                    )
+                    );
                   })}
                 </SelectContent>
               </Select>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-right block">نبرة المحتوى</Label>
+              <Label className="text-right block">لحن محتوا</Label>
               <Select value={tone} onValueChange={setTone} dir="rtl">
                 <SelectTrigger>
-                  <SelectValue placeholder="اختر النبرة" />
+                  <SelectValue placeholder="لحن را انتخاب کنید" />
                 </SelectTrigger>
                 <SelectContent>
                   {tones.map((t) => (
@@ -153,11 +176,11 @@ export function CaptionGenerator() {
 
           <div className="space-y-2">
             <Label htmlFor="hashtags" className="text-right block">
-              الهاشتاغات
+              هشتگ‌ها
             </Label>
             <Input
               id="hashtags"
-              placeholder="هاشتاغ1، هاشتاغ2، هاشتاغ3"
+              placeholder="هشتگ1، هشتگ2، هشتگ3"
               value={hashtags}
               onChange={(e) => setHashtags(e.target.value)}
               className="text-right"
@@ -165,8 +188,12 @@ export function CaptionGenerator() {
             />
           </div>
 
-          <Button onClick={handleGenerate} disabled={!content.trim() || isGenerating} className="w-full">
-            {isGenerating ? "جاري الإنتاج..." : "إنتاج التسميات التوضيحية"}
+          <Button
+            onClick={handleGenerate}
+            disabled={!content.trim() || isGenerating}
+            className="w-full"
+          >
+            {isGenerating ? "در حال تولید..." : "تولید کپشن"}
           </Button>
         </CardContent>
       </Card>
@@ -176,13 +203,17 @@ export function CaptionGenerator() {
         <Tabs defaultValue="instagram" className="w-full" dir="rtl">
           <TabsList className="grid w-full grid-cols-4">
             {platforms.map((p) => {
-              const Icon = p.icon
+              const Icon = p.icon;
               return (
-                <TabsTrigger key={p.value} value={p.value} className="flex items-center gap-1">
+                <TabsTrigger
+                  key={p.value}
+                  value={p.value}
+                  className="flex items-center gap-1"
+                >
                   <Icon className="h-4 w-4" />
                   {p.label}
                 </TabsTrigger>
-              )
+              );
             })}
           </TabsList>
 
@@ -198,25 +229,44 @@ export function CaptionGenerator() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => navigator.clipboard.writeText(generatedCaptions[p.value])}
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          generatedCaptions[p.value]
+                        )
+                      }
                     >
                       <Copy className="h-4 w-4 ml-1" />
-                      نسخ
+                      کپی
                     </Button>
                   </div>
-                  <CardDescription>الحد الأقصى: {p.limit.toLocaleString()} حرف</CardDescription>
+                  <CardDescription>
+                    حداکثر مجاز: {p.limit.toLocaleString()} کاراکتر
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="p-4 bg-muted rounded-lg text-right">
-                      <div className="whitespace-pre-wrap leading-relaxed" dir="rtl">
+                      <div
+                        className="whitespace-pre-wrap leading-relaxed"
+                        dir="rtl"
+                      >
                         {generatedCaptions[p.value]}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Badge variant="secondary">{generatedCaptions[p.value].length} حرف</Badge>
-                      <Badge variant={generatedCaptions[p.value].length > p.limit ? "destructive" : "secondary"}>
-                        {generatedCaptions[p.value].length > p.limit ? "يتجاوز الحد المسموح" : "ضمن الحد المسموح"}
+                      <Badge variant="secondary">
+                        {generatedCaptions[p.value].length} کاراکتر
+                      </Badge>
+                      <Badge
+                        variant={
+                          generatedCaptions[p.value].length > p.limit
+                            ? "destructive"
+                            : "secondary"
+                        }
+                      >
+                        {generatedCaptions[p.value].length > p.limit
+                          ? "بیشتر از حد مجاز"
+                          : "در محدوده مجاز"}
                       </Badge>
                     </div>
                   </div>
@@ -227,5 +277,5 @@ export function CaptionGenerator() {
         </Tabs>
       )}
     </div>
-  )
+  );
 }

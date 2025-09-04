@@ -1,20 +1,43 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Separator } from "@/components/ui/separator"
-import { Shield, Bell, Palette, Key, Smartphone, Lock, Eye, EyeOff, AlertTriangle, Save } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import {
+  Shield,
+  Bell,
+  Palette,
+  Key,
+  Smartphone,
+  Lock,
+  Eye,
+  EyeOff,
+  AlertTriangle,
+  Save,
+} from "lucide-react";
 
 export function AccountSettings() {
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
-  const [showNewPassword, setShowNewPassword] = useState(false)
-  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
 
   const [settings, setSettings] = useState({
     // Security
@@ -29,45 +52,45 @@ export function AccountSettings() {
     weeklyReports: true,
 
     // Preferences
-    language: "ar",
+    language: "fa",
     theme: "system",
-    timezone: "Asia/Riyadh",
+    timezone: "Asia/Tehran",
 
     // Privacy
     profileVisibility: "private",
     dataSharing: false,
     analyticsTracking: true,
-  })
+  });
 
   const handleSettingChange = (key: string, value: any) => {
-    setSettings((prev) => ({ ...prev, [key]: value }))
-  }
+    setSettings((prev) => ({ ...prev, [key]: value }));
+  };
 
   const languages = [
-    { value: "ar", label: "العربية", flag: "🇸🇦" },
-    { value: "en", label: "English", flag: "🇺🇸" },
-    { value: "fr", label: "Français", flag: "🇫🇷" },
-  ]
+    { value: "fa", label: "فارسی", flag: "🇮🇷" },
+    { value: "en", label: "انگلیسی", flag: "🇺🇸" },
+    { value: "fr", label: "فرانسوی", flag: "🇫🇷" },
+  ];
 
   const themes = [
-    { value: "light", label: "فاتح" },
-    { value: "dark", label: "داكن" },
-    { value: "system", label: "تلقائي" },
-  ]
+    { value: "light", label: "روشن" },
+    { value: "dark", label: "تاریک" },
+    { value: "system", label: "سیستمی" },
+  ];
 
   const timezones = [
-    { value: "Asia/Riyadh", label: "الرياض (GMT+3)" },
-    { value: "Asia/Dubai", label: "دبي (GMT+4)" },
-    { value: "Asia/Kuwait", label: "الكويت (GMT+3)" },
-  ]
+    { value: "Asia/Tehran", label: "تهران (GMT+3:30)" },
+    { value: "Asia/Riyadh", label: "ریاض (GMT+3)" },
+    { value: "Asia/Dubai", label: "دبی (GMT+4)" },
+  ];
 
   return (
     <Tabs defaultValue="security" className="w-full" dir="rtl">
       <TabsList className="grid w-full grid-cols-4">
-        <TabsTrigger value="security">الأمان</TabsTrigger>
-        <TabsTrigger value="notifications">الإشعارات</TabsTrigger>
-        <TabsTrigger value="preferences">التفضيلات</TabsTrigger>
-        <TabsTrigger value="privacy">الخصوصية</TabsTrigger>
+        <TabsTrigger value="security">امنیت</TabsTrigger>
+        <TabsTrigger value="notifications">اعلان‌ها</TabsTrigger>
+        <TabsTrigger value="preferences">ترجیحات</TabsTrigger>
+        <TabsTrigger value="privacy">حریم خصوصی</TabsTrigger>
       </TabsList>
 
       <TabsContent value="security" className="space-y-6">
@@ -76,21 +99,25 @@ export function AccountSettings() {
           <CardHeader className="text-right">
             <CardTitle className="flex items-center gap-2">
               <Key className="h-5 w-5" />
-              تغيير كلمة المرور
+              تغییر رمز عبور
             </CardTitle>
-            <CardDescription>تحديث كلمة المرور لحسابك</CardDescription>
+            <CardDescription>
+              رمز عبور حساب خود را به‌روزرسانی کنید
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="current-password" className="text-right block">
-                كلمة المرور الحالية
+                رمز عبور فعلی
               </Label>
               <div className="relative">
                 <Input
                   id="current-password"
                   type={showCurrentPassword ? "text" : "password"}
                   value={settings.currentPassword}
-                  onChange={(e) => handleSettingChange("currentPassword", e.target.value)}
+                  onChange={(e) =>
+                    handleSettingChange("currentPassword", e.target.value)
+                  }
                   className="text-right pr-10"
                   dir="rtl"
                 />
@@ -101,21 +128,27 @@ export function AccountSettings() {
                   className="absolute right-0 top-0 h-full px-3"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                 >
-                  {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showCurrentPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </Button>
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="new-password" className="text-right block">
-                كلمة المرور الجديدة
+                رمز عبور جدید
               </Label>
               <div className="relative">
                 <Input
                   id="new-password"
                   type={showNewPassword ? "text" : "password"}
                   value={settings.newPassword}
-                  onChange={(e) => handleSettingChange("newPassword", e.target.value)}
+                  onChange={(e) =>
+                    handleSettingChange("newPassword", e.target.value)
+                  }
                   className="text-right pr-10"
                   dir="rtl"
                 />
@@ -126,20 +159,26 @@ export function AccountSettings() {
                   className="absolute right-0 top-0 h-full px-3"
                   onClick={() => setShowNewPassword(!showNewPassword)}
                 >
-                  {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showNewPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </Button>
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="confirm-password" className="text-right block">
-                تأكيد كلمة المرور الجديدة
+                تایید رمز عبور جدید
               </Label>
               <Input
                 id="confirm-password"
                 type="password"
                 value={settings.confirmPassword}
-                onChange={(e) => handleSettingChange("confirmPassword", e.target.value)}
+                onChange={(e) =>
+                  handleSettingChange("confirmPassword", e.target.value)
+                }
                 className="text-right"
                 dir="rtl"
               />
@@ -147,7 +186,7 @@ export function AccountSettings() {
 
             <Button className="w-full">
               <Save className="ml-2 h-4 w-4" />
-              تحديث كلمة المرور
+              به‌روزرسانی رمز عبور
             </Button>
           </CardContent>
         </Card>
@@ -157,34 +196,44 @@ export function AccountSettings() {
           <CardHeader className="text-right">
             <CardTitle className="flex items-center gap-2">
               <Smartphone className="h-5 w-5" />
-              المصادقة الثنائية
+              احراز هویت دو مرحله‌ای
             </CardTitle>
-            <CardDescription>إضافة طبقة حماية إضافية لحسابك</CardDescription>
+            <CardDescription>
+              افزودن لایه امنیتی بیشتر به حساب شما
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="text-right">
-                <p className="font-medium">تفعيل المصادقة الثنائية</p>
-                <p className="text-sm text-muted-foreground">استخدم تطبيق المصادقة للحصول على رموز الأمان</p>
+                <p className="font-medium">فعال‌سازی احراز هویت دو مرحله‌ای</p>
+                <p className="text-sm text-muted-foreground">
+                  از اپلیکیشن احراز هویت برای دریافت کد امنیتی استفاده کنید
+                </p>
               </div>
-              <Switch checked={twoFactorEnabled} onCheckedChange={setTwoFactorEnabled} />
+              <Switch
+                checked={twoFactorEnabled}
+                onCheckedChange={setTwoFactorEnabled}
+              />
             </div>
 
             {twoFactorEnabled && (
               <div className="p-4 bg-muted rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <Shield className="h-4 w-4 text-green-500" />
-                  <span className="text-sm font-medium">المصادقة الثنائية مفعلة</span>
+                  <span className="text-sm font-medium">
+                    احراز هویت دو مرحله‌ای فعال شد
+                  </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  تم تفعيل المصادقة الثنائية بنجاح. ستحتاج إلى رمز من تطبيق المصادقة عند تسجيل الدخول.
+                  احراز هویت دو مرحله‌ای با موفقیت فعال شد. هنگام ورود باید کد
+                  را از اپلیکیشن احراز هویت وارد کنید.
                 </p>
               </div>
             )}
 
             {!twoFactorEnabled && (
               <Button variant="outline" className="w-full bg-transparent">
-                إعداد المصادقة الثنائية
+                راه‌اندازی احراز هویت دو مرحله‌ای
               </Button>
             )}
           </CardContent>
@@ -196,53 +245,71 @@ export function AccountSettings() {
           <CardHeader className="text-right">
             <CardTitle className="flex items-center gap-2">
               <Bell className="h-5 w-5" />
-              إعدادات الإشعارات
+              تنظیمات اعلان‌ها
             </CardTitle>
-            <CardDescription>تحكم في الإشعارات التي تتلقاها</CardDescription>
+            <CardDescription>
+              کنترل اعلان‌هایی که دریافت می‌کنید
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">إشعارات البريد الإلكتروني</p>
-                  <p className="text-sm text-muted-foreground">تلقي إشعارات مهمة عبر البريد</p>
+                  <p className="font-medium">اعلان‌های ایمیل</p>
+                  <p className="text-sm text-muted-foreground">
+                    دریافت اعلان‌های مهم از طریق ایمیل
+                  </p>
                 </div>
                 <Switch
                   checked={settings.emailNotifications}
-                  onCheckedChange={(value) => handleSettingChange("emailNotifications", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("emailNotifications", value)
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">الإشعارات الفورية</p>
-                  <p className="text-sm text-muted-foreground">إشعارات فورية في المتصفح</p>
+                  <p className="font-medium">اعلان‌های فوری</p>
+                  <p className="text-sm text-muted-foreground">
+                    اعلان‌های فوری در مرورگر
+                  </p>
                 </div>
                 <Switch
                   checked={settings.pushNotifications}
-                  onCheckedChange={(value) => handleSettingChange("pushNotifications", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("pushNotifications", value)
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">رسائل تسويقية</p>
-                  <p className="text-sm text-muted-foreground">عروض وأخبار المنتج</p>
+                  <p className="font-medium">پیام‌های تبلیغاتی</p>
+                  <p className="text-sm text-muted-foreground">
+                    پیشنهادات و اخبار محصول
+                  </p>
                 </div>
                 <Switch
                   checked={settings.marketingEmails}
-                  onCheckedChange={(value) => handleSettingChange("marketingEmails", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("marketingEmails", value)
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">التقارير الأسبوعية</p>
-                  <p className="text-sm text-muted-foreground">ملخص أسبوعي لنشاطك</p>
+                  <p className="font-medium">گزارش‌های هفتگی</p>
+                  <p className="text-sm text-muted-foreground">
+                    خلاصه هفتگی فعالیت شما
+                  </p>
                 </div>
                 <Switch
                   checked={settings.weeklyReports}
-                  onCheckedChange={(value) => handleSettingChange("weeklyReports", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("weeklyReports", value)
+                  }
                 />
               </div>
             </div>
@@ -255,17 +322,19 @@ export function AccountSettings() {
           <CardHeader className="text-right">
             <CardTitle className="flex items-center gap-2">
               <Palette className="h-5 w-5" />
-              تفضيلات العرض
+              ترجیحات نمایش
             </CardTitle>
-            <CardDescription>تخصيص واجهة المستخدم</CardDescription>
+            <CardDescription>شخصی‌سازی رابط کاربری</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-right block">اللغة</Label>
+                <Label className="text-right block">زبان</Label>
                 <Select
                   value={settings.language}
-                  onValueChange={(value) => handleSettingChange("language", value)}
+                  onValueChange={(value) =>
+                    handleSettingChange("language", value)
+                  }
                   dir="rtl"
                 >
                   <SelectTrigger>
@@ -285,8 +354,12 @@ export function AccountSettings() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-right block">المظهر</Label>
-                <Select value={settings.theme} onValueChange={(value) => handleSettingChange("theme", value)} dir="rtl">
+                <Label className="text-right block">ظاهر</Label>
+                <Select
+                  value={settings.theme}
+                  onValueChange={(value) => handleSettingChange("theme", value)}
+                  dir="rtl"
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -301,10 +374,12 @@ export function AccountSettings() {
               </div>
 
               <div className="space-y-2 md:col-span-2">
-                <Label className="text-right block">المنطقة الزمنية</Label>
+                <Label className="text-right block">منطقه زمانی</Label>
                 <Select
                   value={settings.timezone}
-                  onValueChange={(value) => handleSettingChange("timezone", value)}
+                  onValueChange={(value) =>
+                    handleSettingChange("timezone", value)
+                  }
                   dir="rtl"
                 >
                   <SelectTrigger>
@@ -329,26 +404,30 @@ export function AccountSettings() {
           <CardHeader className="text-right">
             <CardTitle className="flex items-center gap-2">
               <Lock className="h-5 w-5" />
-              إعدادات الخصوصية
+              تنظیمات حریم خصوصی
             </CardTitle>
-            <CardDescription>تحكم في خصوصية بياناتك</CardDescription>
+            <CardDescription>کنترل حریم خصوصی داده‌های شما</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-right block">مستوى خصوصية الملف الشخصي</Label>
+                <Label className="text-right block">
+                  سطح حریم خصوصی پروفایل
+                </Label>
                 <Select
                   value={settings.profileVisibility}
-                  onValueChange={(value) => handleSettingChange("profileVisibility", value)}
+                  onValueChange={(value) =>
+                    handleSettingChange("profileVisibility", value)
+                  }
                   dir="rtl"
                 >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="public">عام</SelectItem>
-                    <SelectItem value="private">خاص</SelectItem>
-                    <SelectItem value="friends">الأصدقاء فقط</SelectItem>
+                    <SelectItem value="public">عمومی</SelectItem>
+                    <SelectItem value="private">خصوصی</SelectItem>
+                    <SelectItem value="friends">فقط دوستان</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -357,23 +436,31 @@ export function AccountSettings() {
 
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">مشاركة البيانات للتحسين</p>
-                  <p className="text-sm text-muted-foreground">مساعدتنا في تحسين الخدمة</p>
+                  <p className="font-medium">اشتراک‌گذاری داده برای بهبود</p>
+                  <p className="text-sm text-muted-foreground">
+                    به ما در بهبود سرویس کمک کنید
+                  </p>
                 </div>
                 <Switch
                   checked={settings.dataSharing}
-                  onCheckedChange={(value) => handleSettingChange("dataSharing", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("dataSharing", value)
+                  }
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="font-medium">تتبع الاستخدام</p>
-                  <p className="text-sm text-muted-foreground">تحليل كيفية استخدامك للمنصة</p>
+                  <p className="font-medium">ردیابی استفاده</p>
+                  <p className="text-sm text-muted-foreground">
+                    تحلیل نحوه استفاده شما از پلتفرم
+                  </p>
                 </div>
                 <Switch
                   checked={settings.analyticsTracking}
-                  onCheckedChange={(value) => handleSettingChange("analyticsTracking", value)}
+                  onCheckedChange={(value) =>
+                    handleSettingChange("analyticsTracking", value)
+                  }
                 />
               </div>
             </div>
@@ -383,17 +470,24 @@ export function AccountSettings() {
             <div className="p-4 bg-destructive/10 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <AlertTriangle className="h-4 w-4 text-destructive" />
-                <span className="text-sm font-medium text-destructive">منطقة الخطر</span>
+                <span className="text-sm font-medium text-destructive">
+                  منطقه خطر
+                </span>
               </div>
               <p className="text-xs text-muted-foreground mb-3">
-                هذه الإجراءات لا يمكن التراجع عنها. تأكد من رغبتك في المتابعة.
+                این اقدامات غیرقابل بازگشت هستند. مطمئن شوید که می‌خواهید ادامه
+                دهید.
               </p>
               <div className="space-y-2">
-                <Button variant="outline" size="sm" className="w-full bg-transparent">
-                  تصدير البيانات
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full bg-transparent"
+                >
+                  صادرات داده‌ها
                 </Button>
                 <Button variant="destructive" size="sm" className="w-full">
-                  حذف الحساب نهائياً
+                  حذف کامل حساب کاربری
                 </Button>
               </div>
             </div>
@@ -401,5 +495,5 @@ export function AccountSettings() {
         </Card>
       </TabsContent>
     </Tabs>
-  )
+  );
 }

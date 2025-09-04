@@ -10,29 +10,59 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
-// Example data
+// داده‌های نمونه با ترجمه فارسی و چند پرامپت بیشتر
 const prompts = [
   {
     id: 1,
-    title: "Prompt One",
-    category: "Writing",
-    text: "Write a story about...",
+    title: "پرومپت یک",
+    category: "نوشتن",
+    text: "یک داستان درباره ... بنویسید.",
   },
   {
     id: 2,
-    title: "Prompt Two",
-    category: "Coding",
-    text: "Create a function that...",
+    title: "پرومپت دو",
+    category: "برنامه‌نویسی",
+    text: "یک تابع ایجاد کنید که ...",
   },
   {
     id: 3,
-    title: "Prompt Three",
-    category: "Writing",
-    text: "Describe your favorite...",
+    title: "پرومپت سه",
+    category: "نوشتن",
+    text: "مورد علاقه خود را توصیف کنید ...",
+  },
+  {
+    id: 4,
+    title: "پرومپت چهار",
+    category: "برنامه‌نویسی",
+    text: "یک الگوریتم مرتب‌سازی بنویسید.",
+  },
+  {
+    id: 5,
+    title: "پرومپت پنج",
+    category: "طراحی",
+    text: "یک لوگو برای یک شرکت فناوری طراحی کنید.",
+  },
+  {
+    id: 6,
+    title: "پرومپت شش",
+    category: "نوشتن",
+    text: "یک نامه رسمی به مدیر خود بنویسید.",
+  },
+  {
+    id: 7,
+    title: "پرومپت هفت",
+    category: "برنامه‌نویسی",
+    text: "یک برنامه برای محاسبه مجموع اعداد بنویسید.",
+  },
+  {
+    id: 8,
+    title: "پرومپت هشت",
+    category: "طراحی",
+    text: "یک پوستر برای رویداد فرهنگی طراحی کنید.",
   },
 ];
 
-// Extract unique categories
+// استخراج دسته‌بندی‌های یکتا
 const categories = Array.from(new Set(prompts.map((p) => p.category)));
 
 export default function PromptsPage() {
@@ -45,17 +75,17 @@ export default function PromptsPage() {
 
   return (
     <div className="max-w-2xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">Prompts</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">پرومپت‌ها</h1>
       <div className="mb-8 flex items-center gap-4">
         <label htmlFor="category" className="font-medium">
-          Filter by category:
+          فیلتر بر اساس دسته‌بندی:
         </label>
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger className="w-40" id="category">
-            <SelectValue placeholder="All" />
+            <SelectValue placeholder="همه" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="all">همه</SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat} value={cat}>
                 {cat}

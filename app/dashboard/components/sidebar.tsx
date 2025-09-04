@@ -56,6 +56,31 @@ const navigation = [
       { name: "گفتار به متن", href: "/dashboard/audio/stt" },
     ],
   },
+  {
+    name: "بازاریابی",
+    href: "/dashboard/marketing",
+    icon: Sparkles,
+  },
+  {
+    name: "پشتیبانی",
+    href: "/dashboard/support",
+    icon: Settings,
+  },
+  {
+    name: "طراحی وب",
+    href: "/dashboard/web-design",
+    icon: ImageIcon,
+  },
+  {
+    name: "آنالیتیکس",
+    href: "/dashboard/analytics",
+    icon: BookOpen,
+  },
+  {
+    name: "گزارش‌ها",
+    href: "/dashboard/reports",
+    icon: FileText,
+  },
 ];
 
 const accountNavigation = [
